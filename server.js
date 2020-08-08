@@ -2,42 +2,68 @@
 // where your node app starts
 
 // init project
+// const express = require('express');
+// const app = express();
+
+// // we've started you off with Express, 
+// // but feel free to use whatever libs or frameworks you'd like through `package.json`.
+
+// // http://expressjs.com/en/starter/static-files.html
+// app.use(express.static('public'));
+
+// // http://expressjs.com/en/starter/basic-routing.html
+// app.get('/', function(request, response) {
+//   response.sendFile(__dirname + '/views/index.html');
+// });
+
+// // listen for requests :)
+// const listener = app.listen(process.env.PORT, function() {
+//   console.log('Your app is listening on port ' + listener.address().port);
+// });
+
 const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const blogRoutes = require('./routes/blogRoutes');
+
+// express app
 const app = express();
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+// connect to mongodb & listen for requests
+const dbURI = 'mongodb+srv://keiny:keiny@nodefirsttutorial.lmt5l.mongodb.net/node-tuts?retryWrites=true&w=majority';
+console.log(process.env.DB_CONNECTION)
+//const dbURI = process.env.DB_CONNECTION;
 
-// http://expressjs.com/en/starter/static-files.html
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result => app.listen(3000))
+  .catch(err => console.log(err));
+
+// register view engine
+app.set('view engine', 'ejs');
+
+// middleware & static files
 app.use(express.static('public'));
-
-// http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+app.use((req, res, next) => {
+  res.locals.path = req.path;
+  next();
 });
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+// routes
+app.get('/', (req, res) => {
+  console.log(process.env.DB_CONNECTION);
+  res.redirect('/blogs');
 });
 
-// const http = require("http");
-// const fs = require("fs");
+app.get('/about', (req, res) => {
+  res.render('about', { title: 'About' });
+});
 
-// //create a server object:
-// http.createServer(function(req, res) {
-//     // console.log(req);
+// blog routes
+app.use('/blogs', blogRoutes);
 
-//     fs.readFile(__dirname +"/views/index.html", (err, data) => {
-//       if (err) {
-//         console.log(err);
-//         res.end(); //end the response
-//       } else {
-//         res.end(data); //end the response
-//       }
-//     });
-//     // res.write("Hello World!"); //write a response to the client
-//     // res.end(); //end the response
-//   })
-//   .listen(8080); //the server object listens on port 8080
-
+// 404 page
+app.use((req, res) => {
+  res.status(404).render('404', { title: '404' });
+});
