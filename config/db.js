@@ -28,16 +28,16 @@ const connectDB = async () => {
       useFindAndModify: false,      
     })
     
-//     const db = mongoose.connection;
+    const db = mongoose.connection;
 
-//     //We enebled the Listener
-//     db.on('error', () => {
-//         console.error('Error occured in db connection');
-//     });
+    //We enebled the Listener
+    db.on('error', () => {
+        console.error('Error occured in db connection');
+    });
 
-//     db.on('open', () => {
-//         console.log('DB Connection established successfully');
-//     }); 
+    db.on('open', () => {
+        console.log('DB Connection established successfully');
+    }); 
     
     console.log(`MongoDB Connected: ${conect.connection.host}`)
 
