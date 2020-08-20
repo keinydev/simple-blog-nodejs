@@ -1,16 +1,22 @@
 const express = require('express');
-// const mongoose = require('mongoose'); 
+const mongoose = require('mongoose'); 
+const morgan = require('morgan');
 const blogRoutes = require('./routes/blogRoutes');
-const connectDB = require('./config/db')
+
 // express app
 const app = express(); 
 
-// connect to mongodb & listen for requests
-// const dbURI = process.env.DB_CONNECTION;
+// Logging
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
 
-// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(result => app.listen(process.env.PORT))
-//   .catch(err => console.log(err));
+// connect to mongodb & listen for requests
+const dbURI = process.env.DB_CONNECTION;
+
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result => app.listen(process.env.PORT))
+  .catch(err => console.log(err));
 
 // register view engine
 app.set('view engine', 'ejs');

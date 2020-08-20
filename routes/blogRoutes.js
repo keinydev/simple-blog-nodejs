@@ -1,4 +1,4 @@
-require('../config/db');
+// require('../config/db');
 const express = require('express');
 const blogController = require('../controllers/blogController');
 
