@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
 
 // express app
-const app = express();
+const app = express(); 
 
 // connect to mongodb & listen for requests
 const dbURI = process.env.DB_CONNECTION;
