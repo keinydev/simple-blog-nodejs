@@ -1,16 +1,26 @@
-// database.js
-const mongoose = require("mongoose");  
-const dbPath = process.env.DB_CONNECTION;
-mongoose.connect(dbPath, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(result => app.listen(process.env.PORT))
-//   .catch(err => console.log(err));
+const mongoose = require('mongoose');
 
+const dbURI = process.env.DB_CONNECTION;
 
-const db = mongoose.connection;
-db.on("error", () => {
-    console.log("> error occurred from the database");
+const db = mongoose.createConnection(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
-db.once("open", () => {
-    console.log("> successfully opened the database");
+
+db.on('error', function (error) {
+    console.log(`MongoDB :: connection ${this.name} ${JSON.stringify(error)}`);
+    db.close().catch(() => console.log(`MongoDB :: failed to close connection ${this.name}`));
 });
-module.exports = mongoose;
+
+db.on('connected', function () {
+    mongoose.set('debug', function (col, method, query, doc) {
+        console.log(`MongoDB :: ${this.conn.name} ${col}.${method}(${JSON.stringify(query)},${JSON.stringify(doc)})`);
+    });
+    console.log(`MongoDB :: connected ${this.name}`);
+});
+
+db.on('disconnected', function () {
+    console.log(`MongoDB :: disconnected ${this.name}`);
+});
+
+module.exports = db;

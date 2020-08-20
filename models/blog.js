@@ -1,5 +1,5 @@
-// const mongoose = require('mongoose');
-const mongoose = require("../config/db");
+const mongoose = require('mongoose');
+// const mongoose = require("../config/db");
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
