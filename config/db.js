@@ -11,17 +11,14 @@ mongoose.connect(dbURI, {
 // require('../model/user');
 const db = mongoose.connection;
 
-db.on('error', function (error) {
-    console.log(`MongoDB :: connection ${this.name} ${JSON.stringify(error)}`);
-    db.close().catch(() => console.log(`MongoDB :: failed to close connection ${this.name}`));
+//We enebled the Listener
+db.on('error', () => {
+    console.error('Error occured in db connection');
 });
 
-db.on('connected', function () {
-    mongoose.set('debug', function (col, method, query, doc) {
-        console.log(`MongoDB :: ${this.conn.name} ${col}.${method}(${JSON.stringify(query)},${JSON.stringify(doc)})`);
-    });
-    console.log(`MongoDB :: connected ${this.name}`);
-});
+db.on('open', () => {
+    console.log('DB Connection established successfully');
+}); 
 
 db.on('disconnected', function () {
     console.log(`MongoDB :: disconnected ${this.name}`);

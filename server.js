@@ -1,6 +1,6 @@
 const express = require('express');
 // const mongoose = require('mongoose');
-require('./config/db');
+
 const blogRoutes = require('./routes/blogRoutes');
 
 // express app
