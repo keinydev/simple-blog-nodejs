@@ -3,10 +3,8 @@ const mongoose = require('mongoose');
 const dbURI = process.env.DB_CONNECTION;
 
 //Connection establishment
-mongoose.connect(dbURI, {
-    useNewUrlParser: true,
-    useCreateIndex: true
-});
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 //Models
 // require('../model/user');
 const db = mongoose.connection;
@@ -19,9 +17,6 @@ db.on('error', () => {
 db.on('open', () => {
     console.log('DB Connection established successfully');
 }); 
+ 
 
-db.on('disconnected', function () {
-    console.log(`MongoDB :: disconnected ${this.name}`);
-});
-
-// module.exports = db;
+module.exports = db;

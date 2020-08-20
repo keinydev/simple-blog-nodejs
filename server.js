@@ -1,8 +1,7 @@
 const express = require('express');
-// const mongoose = require('mongoose');
-
+// const mongoose = require('mongoose'); 
 const blogRoutes = require('./routes/blogRoutes');
-
+const connectDB = require('./config/db')
 // express app
 const app = express(); 
 
