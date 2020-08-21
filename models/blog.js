@@ -1,6 +1,6 @@
-const mongoose = require('../config/db');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-console.log(mongoose)
+
 const blogSchema = new Schema({
   title: {
     type: String,

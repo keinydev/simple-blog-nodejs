@@ -3,7 +3,7 @@ const DB_URL = process.env.DB_CONNECTION;
 
 // Connect
 mongoose
-  .connect(DB_URL.URI, {
+  .connect(DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
