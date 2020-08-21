@@ -1,12 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose'); 
 const morgan = require('morgan');
-
+require('./config/db');
 const blogRoutes = require('./routes/blogRoutes');
  
 // express app
 const app = express(); 
-
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
@@ -14,11 +13,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // connect to mongodb & listen for requests
-const dbURI = process.env.DB_CONNECTION;
+// const dbURI = process.env.DB_CONNECTION;
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(result => app.listen(process.env.PORT))
-  .catch(err => console.log(err));
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(result => app.listen(process.env.PORT))
+//   .catch(err => console.log(err));
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -49,4 +48,9 @@ app.use('/blogs', blogRoutes);
 // 404 page
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
+});
+
+// listen for requests :)
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + listener.address().port);
 });
