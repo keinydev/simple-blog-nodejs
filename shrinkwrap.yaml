@@ -1,6 +1,7 @@
 dependencies:
   ejs: 3.1.5
   express: 4.17.1
+  mongodb: 3.6.0
   mongoose: 5.10.0
   morgan: 1.10.0
 packages:
@@ -710,5 +711,6 @@ shrinkwrapVersion: 3
 specifiers:
   ejs: ^3.1.4
   express: ^4.17.1
+  mongodb: ^3.5.9
   mongoose: ^5.9.29
   morgan: ^1.10.0

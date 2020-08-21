@@ -1,9 +1,6 @@
-const mongoose = require('mongoose'); 
-const connectDB = require('../config/db');
-// require('../config/db');
-// const mongoose = require("../config/db");
+const mongoose = require('../config/db');
 const Schema = mongoose.Schema;
-
+console.log(mongoose)
 const blogSchema = new Schema({
   title: {
     type: String,
