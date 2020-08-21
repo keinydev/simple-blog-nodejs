@@ -6,6 +6,8 @@ const blogRoutes = require('./routes/blogRoutes');
  
 // express app
 const app = express(); 
+// database
+require("./config/db");
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
