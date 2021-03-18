@@ -1,27 +1,18 @@
-Welcome to Glitch
+Welcome to Simple blog using Node.js and Express js
 =================
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
-
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
-
-Find out more [about Glitch](https://glitch.com/about).
+This project is a simple CRUD of a blog using Node.js. The purpose of this mini project is for learning
 
 
-Your Project
+Project
 ------------
 
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
-
 On the back-end,
-- your app starts at `server.js`
+- app starts at `server.js`
 - add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+- app secrets in `.env`. I use DB_CONNECTION for MongoDb connection using MongoDb Atlas
 
+Click here to see the [DEMO](https://simple-blog-crud-nodejs.glitch.me/blogs)
 
-Made by [Glitch](https://glitch.com/)
+Hosted by [Glitch](https://glitch.com/)
 -------------------
-
-\ ゜o゜)ノ

@@ -12,13 +12,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
-// connect to mongodb & listen for requests
-// const dbURI = process.env.DB_CONNECTION;
-
-// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(result => app.listen(process.env.PORT))
-//   .catch(err => console.log(err));
-
 // register view engine
 app.set('view engine', 'ejs');
 
@@ -31,8 +24,7 @@ app.use((req, res, next) => {
 });
 
 
-
-// routes
+// general routes
 app.get('/', (req, res) => {
   console.log(process.env.DB_CONNECTION);
   res.redirect('/blogs');
